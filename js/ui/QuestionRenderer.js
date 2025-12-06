@@ -285,7 +285,7 @@ class QuestionRenderer {
             // Add dropzone for each blank (except after the last part)
             if (index < parts.length - 1) {
                 const dropzone = document.createElement('div');
-                dropzone.className = 'inline-block mx-1 mb-2 p-2 min-w-[120px] border-2 border-dashed border-blue-400 rounded bg-blue-50 text-center cursor-pointer relative';
+                dropzone.className = 'inline-block mx-1 mb-2 p-2 min-w-[120px] border-2 border-dashed border-blue-400 rounded bg-blue-50 text-center cursor-move relative';
                 dropzone.dataset.blankIndex = blankIndex;
                 dropzone.dataset.correctAnswer = question.blanks.find(b => b.position === blankIndex)?.answer || '';
                 dropzone.textContent = '∅';
@@ -295,10 +295,13 @@ class QuestionRenderer {
                 dropzone.style.alignItems = 'center';
                 dropzone.style.justifyContent = 'center';
                 
-                // Allow drops
+                // Allow drops on blanks
                 dropzone.addEventListener('dragover', this.handleDragOver.bind(this));
                 dropzone.addEventListener('drop', (e) => this.handleDropOnBlank(e, dropzone, question));
                 dropzone.addEventListener('dragend', this.handleDragEnd.bind(this));
+                
+                // Make dropzone draggable when it has content
+                dropzone.addEventListener('dragstart', (e) => this.handleDragStartFromBlank(e, dropzone));
                 
                 textContainer.appendChild(dropzone);
                 blankIndex++;
@@ -330,12 +333,17 @@ class QuestionRenderer {
             wordBtn.textContent = word;
             wordBtn.draggable = true;
             wordBtn.dataset.word = word;
+            wordBtn.id = `word-${word}`;
             
             wordBtn.addEventListener('dragstart', this.handleDragStart.bind(this));
             wordBtn.addEventListener('dragend', this.handleDragEnd.bind(this));
             
             wordsList.appendChild(wordBtn);
         });
+
+        // Make words container a drop zone to return words
+        wordsList.addEventListener('dragover', this.handleDragOver.bind(this));
+        wordsList.addEventListener('drop', (e) => this.handleDropOnWordsList(e, wordsList));
 
         wordsContainer.appendChild(wordsList);
         container.appendChild(wordsContainer);
@@ -356,6 +364,16 @@ class QuestionRenderer {
         e.target.style.opacity = '0.5';
     }
 
+    handleDragStartFromBlank(e, dropzone) {
+        if (dropzone.dataset.value) {
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', dropzone.dataset.value);
+            e.dataTransfer.setData('source', 'blank');
+            e.dataTransfer.setData('sourceBlankIndex', dropzone.dataset.blankIndex);
+            dropzone.style.opacity = '0.5';
+        }
+    }
+
     handleDragEnd(e) {
         e.target.style.opacity = '1';
     }
@@ -370,6 +388,36 @@ class QuestionRenderer {
     handleDropOnBlank(e, dropzone, question) {
         e.preventDefault();
         const word = e.dataTransfer.getData('text/plain');
+        const source = e.dataTransfer.getData('source');
+        const sourceBlankIndex = e.dataTransfer.getData('sourceBlankIndex');
+        
+        // If the word came from another blank, clear that blank first
+        if (source === 'blank') {
+            const sourceBlank = document.querySelector(`[data-blank-index="${sourceBlankIndex}"]`);
+            if (sourceBlank) {
+                sourceBlank.textContent = '∅';
+                sourceBlank.style.color = '#999';
+                sourceBlank.dataset.value = '';
+                sourceBlank.style.backgroundColor = '#dbeafe';
+                sourceBlank.style.borderColor = '#60a5fa';
+                sourceBlank.draggable = false;
+            }
+        }
+        
+        // If there was already a word in this blank, return it to the word list
+        if (dropzone.dataset.value) {
+            const oldWord = dropzone.dataset.value;
+            const wordBtn = document.getElementById(`word-${oldWord}`);
+            if (wordBtn) {
+                wordBtn.style.display = 'inline-block';
+            }
+        }
+        
+        // Hide the word button if it exists in the word list
+        const wordBtn = document.getElementById(`word-${word}`);
+        if (wordBtn) {
+            wordBtn.style.display = 'none';
+        }
         
         // Update dropzone content
         dropzone.textContent = word;
@@ -377,9 +425,32 @@ class QuestionRenderer {
         dropzone.dataset.value = word;
         dropzone.style.backgroundColor = '#fff';
         dropzone.style.borderColor = '#60a5fa';
+        dropzone.style.cursor = 'move';
+        dropzone.draggable = true;
+    }
 
-        // Return drag element to original opacity
-        e.dataTransfer.dropEffect = 'move';
+    handleDropOnWordsList(e, wordsList) {
+        e.preventDefault();
+        const word = e.dataTransfer.getData('text/plain');
+        
+        // Find the blank that had this word
+        const blanks = document.querySelectorAll('[data-blank-index]');
+        blanks.forEach(blank => {
+            if (blank.dataset.value === word) {
+                blank.textContent = '∅';
+                blank.style.color = '#999';
+                blank.dataset.value = '';
+                blank.style.backgroundColor = '#dbeafe';
+                blank.style.borderColor = '#60a5fa';
+                blank.draggable = false;
+            }
+        });
+        
+        // Show the word button again
+        const wordBtn = document.getElementById(`word-${word}`);
+        if (wordBtn) {
+            wordBtn.style.display = 'inline-block';
+        }
     }
 
     submitFillBlanksAnswer(question) {
