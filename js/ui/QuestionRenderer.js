@@ -1,8 +1,9 @@
 // Question Renderer - handles rendering questions and answer options
 class QuestionRenderer {
-    constructor(elements, gameEngine) {
+    constructor(elements, gameEngine, nextBtn) {
         this.elements = elements;
         this.gameEngine = gameEngine;
+        this.nextBtn = nextBtn;
         this.answerCallback = null;
     }
 
@@ -25,7 +26,7 @@ class QuestionRenderer {
         this.elements.progressBar.style.width = `${progress}%`;
 
         // Hide next button until answer is selected
-        this.elements.nextBtn.classList.add('hidden');
+        this.nextBtn.classList.add('hidden');
 
         // Update category badge
         this.renderCategoryBadge(question.category);
@@ -85,7 +86,7 @@ class QuestionRenderer {
             this.answerCallback(isCorrect);
         }
 
-        this.elements.nextBtn.classList.remove('hidden');
+        this.nextBtn.classList.remove('hidden');
     }
 
     renderMapQuestion(question) {

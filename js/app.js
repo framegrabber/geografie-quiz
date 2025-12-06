@@ -18,7 +18,7 @@ class App {
 
         // Initialize UI managers
         this.uiUpdater = new UIUpdater(this.elements.ui);
-        this.questionRenderer = new QuestionRenderer(this.elements.quiz, this.gameEngine);
+        this.questionRenderer = new QuestionRenderer(this.elements.quiz, this.gameEngine, this.elements.buttons.nextBtn);
         this.mapRenderer = new MapRenderer(this.elements.quiz.mapContainer, null);
         this.statsRenderer = new StatsRenderer(this.elements.stats, this.gameEngine);
 
