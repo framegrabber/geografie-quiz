@@ -6,10 +6,15 @@ class StatsManager {
 
     loadStats() {
         const saved = getCookie(QUIZ_CONFIG.statsCookieName);
+        const defaultStats = this.getDefaultStats();
+        
         if (saved) {
-            return parseJSON(saved, this.getDefaultStats());
+            const parsedStats = parseJSON(saved, defaultStats);
+            // Merge with default stats to ensure all categories exist
+            parsedStats.categories = { ...defaultStats.categories, ...parsedStats.categories };
+            return parsedStats;
         }
-        return this.getDefaultStats();
+        return defaultStats;
     }
 
     getDefaultStats() {

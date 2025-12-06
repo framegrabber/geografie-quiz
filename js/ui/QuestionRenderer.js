@@ -40,6 +40,8 @@ class QuestionRenderer {
             this.renderFlagToCountry(question);
         } else if (question.type === 'country-to-flag') {
             this.renderCountryToFlag(question);
+        } else if (question.type === 'fillblanks') {
+            this.renderFillBlanks(question);
         }
     }
 
@@ -103,9 +105,13 @@ class QuestionRenderer {
         const isCorrect = selectedAnswers.length === correctAnswers.length &&
             selectedAnswers.every(answer => correctAnswers.includes(answer));
 
-        // Disable all buttons
+        // Disable all buttons and apply visual styling
         const allButtons = this.elements.answerContainer.querySelectorAll('button');
-        disableAllButtons(this.elements.answerContainer);
+        allButtons.forEach(btn => {
+            btn.disabled = true;
+            btn.style.opacity = '0.6';
+            btn.style.cursor = 'not-allowed';
+        });
 
         // Show feedback
         buttons.forEach(button => {
@@ -245,6 +251,213 @@ class QuestionRenderer {
         if (this.answerCallback) {
             this.answerCallback(isCorrect);
         }
+        this.nextBtn.classList.remove('hidden');
+    }
+
+    renderFillBlanks(question) {
+        // Hide map elements
+        this.elements.mapContainer.classList.add('hidden');
+        this.elements.mapInstruction.classList.add('hidden');
+
+        // Show answer container
+        this.elements.answerContainer.classList.remove('hidden');
+        clearContainer(this.elements.answerContainer);
+
+        // Create container for the exercise
+        const container = document.createElement('div');
+        container.className = 'space-y-6';
+
+        // Create text with blanks
+        const textContainer = document.createElement('div');
+        textContainer.className = 'bg-gray-100 p-6 rounded-lg text-lg leading-loose border-2 border-gray-300';
+        
+        // Parse the text and create dropzones
+        const parts = question.text.split('_');
+        let blankIndex = 0;
+        
+        parts.forEach((part, index) => {
+            if (part !== '') {
+                const textSpan = document.createElement('span');
+                textSpan.textContent = part;
+                textContainer.appendChild(textSpan);
+            }
+            
+            // Add dropzone for each blank (except after the last part)
+            if (index < parts.length - 1) {
+                const dropzone = document.createElement('div');
+                dropzone.className = 'inline-block mx-1 mb-2 p-2 min-w-[120px] border-2 border-dashed border-blue-400 rounded bg-blue-50 text-center cursor-pointer relative';
+                dropzone.dataset.blankIndex = blankIndex;
+                dropzone.dataset.correctAnswer = question.blanks.find(b => b.position === blankIndex)?.answer || '';
+                dropzone.textContent = '∅';
+                dropzone.style.color = '#999';
+                dropzone.style.minHeight = '40px';
+                dropzone.style.display = 'inline-flex';
+                dropzone.style.alignItems = 'center';
+                dropzone.style.justifyContent = 'center';
+                
+                // Allow drops
+                dropzone.addEventListener('dragover', this.handleDragOver.bind(this));
+                dropzone.addEventListener('drop', (e) => this.handleDropOnBlank(e, dropzone, question));
+                dropzone.addEventListener('dragend', this.handleDragEnd.bind(this));
+                
+                textContainer.appendChild(dropzone);
+                blankIndex++;
+            }
+        });
+        
+        container.appendChild(textContainer);
+
+        // Create draggable words container
+        const wordsContainer = document.createElement('div');
+        wordsContainer.className = 'bg-blue-50 p-4 rounded-lg border-2 border-blue-300';
+        
+        const wordsLabel = document.createElement('div');
+        wordsLabel.className = 'font-semibold text-blue-900 mb-3';
+        wordsLabel.textContent = 'Wörter (ziehe sie in die Lücken):';
+        wordsContainer.appendChild(wordsLabel);
+
+        const wordsList = document.createElement('div');
+        wordsList.className = 'flex flex-wrap gap-2';
+        wordsList.id = 'wordsList';
+
+        // Shuffle words for randomization
+        const shuffledWords = [...question.words].sort(() => Math.random() - 0.5);
+
+        // Create draggable word buttons
+        shuffledWords.forEach(word => {
+            const wordBtn = document.createElement('div');
+            wordBtn.className = 'px-4 py-2 bg-blue-500 text-white rounded cursor-move hover:bg-blue-600 select-none transition';
+            wordBtn.textContent = word;
+            wordBtn.draggable = true;
+            wordBtn.dataset.word = word;
+            
+            wordBtn.addEventListener('dragstart', this.handleDragStart.bind(this));
+            wordBtn.addEventListener('dragend', this.handleDragEnd.bind(this));
+            
+            wordsList.appendChild(wordBtn);
+        });
+
+        wordsContainer.appendChild(wordsList);
+        container.appendChild(wordsContainer);
+
+        // Create submit button
+        const submitBtn = document.createElement('button');
+        submitBtn.textContent = 'Antwort abgeben';
+        submitBtn.className = 'w-full mt-4 p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition';
+        submitBtn.addEventListener('click', () => this.submitFillBlanksAnswer(question));
+        container.appendChild(submitBtn);
+
+        this.elements.answerContainer.appendChild(container);
+    }
+
+    handleDragStart(e) {
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', e.target.dataset.word);
+        e.target.style.opacity = '0.5';
+    }
+
+    handleDragEnd(e) {
+        e.target.style.opacity = '1';
+    }
+
+    handleDragOver(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        e.currentTarget.style.backgroundColor = '#dbeafe';
+        e.currentTarget.style.borderColor = '#0084ff';
+    }
+
+    handleDropOnBlank(e, dropzone, question) {
+        e.preventDefault();
+        const word = e.dataTransfer.getData('text/plain');
+        
+        // Update dropzone content
+        dropzone.textContent = word;
+        dropzone.style.color = '#000';
+        dropzone.dataset.value = word;
+        dropzone.style.backgroundColor = '#fff';
+        dropzone.style.borderColor = '#60a5fa';
+
+        // Return drag element to original opacity
+        e.dataTransfer.dropEffect = 'move';
+    }
+
+    submitFillBlanksAnswer(question) {
+        // Find and disable the submit button
+        const submitBtn = Array.from(document.querySelectorAll('button')).find(btn => btn.textContent === 'Antwort abgeben');
+        
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.6';
+            submitBtn.style.cursor = 'not-allowed';
+        }
+
+        const dropzones = document.querySelectorAll('[data-blank-index]');
+        let allCorrect = true;
+        let filledBlanks = 0;
+        let correctCount = 0;
+        let wrongCount = 0;
+
+        dropzones.forEach(dropzone => {
+            const correctAnswer = dropzone.dataset.correctAnswer;
+            const userAnswer = dropzone.dataset.value || '';
+
+            if (userAnswer === correctAnswer) {
+                dropzone.style.backgroundColor = '#dcfce7';
+                dropzone.style.borderColor = '#22c55e';
+                correctCount++;
+            } else {
+                allCorrect = false;
+                wrongCount++;
+                if (userAnswer === '') {
+                    dropzone.style.backgroundColor = '#fee2e2';
+                    dropzone.style.borderColor = '#ef4444';
+                    dropzone.textContent = '✗';
+                    dropzone.style.color = '#dc2626';
+                } else {
+                    dropzone.style.backgroundColor = '#fee2e2';
+                    dropzone.style.borderColor = '#ef4444';
+                    dropzone.style.color = '#000';
+                }
+            }
+            
+            if (userAnswer !== '') {
+                filledBlanks++;
+            }
+        });
+
+        // If not all filled, show error
+        if (filledBlanks < dropzones.length) {
+            allCorrect = false;
+        }
+
+        // Show feedback and disable interaction
+        if (!allCorrect) {
+            // Show correct answers
+            dropzones.forEach(dropzone => {
+                if (dropzone.dataset.value !== dropzone.dataset.correctAnswer) {
+                    const correctLabel = document.createElement('div');
+                    correctLabel.className = 'text-xs mt-1 text-green-700 font-semibold';
+                    correctLabel.textContent = `✓ ${dropzone.dataset.correctAnswer}`;
+                    if (!dropzone.querySelector('.text-xs')) {
+                        dropzone.appendChild(correctLabel);
+                    }
+                }
+            });
+        }
+
+        // Disable word dragging
+        document.querySelectorAll('#wordsList div').forEach(word => {
+            word.draggable = false;
+            word.style.opacity = '0.6';
+            word.style.cursor = 'not-allowed';
+        });
+
+        // Pass individual answer counts to callback
+        if (this.answerCallback) {
+            this.answerCallback({ isCorrect: allCorrect, correct: correctCount, wrong: wrongCount });
+        }
+
         this.nextBtn.classList.remove('hidden');
     }
 }

@@ -652,5 +652,26 @@ const quizData = {
             type: "multiple",
             category: "Bayern"
         }
+    ],
+    bayerischefluesze: [
+        {
+            question: "Ergänze den Merkspruch der bayerischen Flüsse mit Drag & Drop:",
+            text: "_, _, _, _, fließen _ zur Donau hin. _, _, _ und _ kommen ihr von _ entgegen.",
+            blanks: [
+                { position: 0, answer: "Iller" },
+                { position: 1, answer: "Lech" },
+                { position: 2, answer: "Isar" },
+                { position: 3, answer: "Inn" },
+                { position: 4, answer: "rechts" },
+                { position: 5, answer: "Wörnitz" },
+                { position: 6, answer: "Altmühl" },
+                { position: 7, answer: "Naab" },
+                { position: 8, answer: "Regen" },
+                { position: 9, answer: "links" }
+            ],
+            words: ["Iller", "Lech", "Isar", "Inn", "rechts", "Wörnitz", "Altmühl", "Naab", "Regen", "links"],
+            type: "fillblanks",
+            category: "Bayerische Flüsse"
+        }
     ]
 };

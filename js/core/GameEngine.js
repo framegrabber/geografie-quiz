@@ -10,7 +10,7 @@ class GameEngine {
         
         let questions;
         if (category === 'mix') {
-            const mixCats = ['bundeslaender', 'europa', 'europa_flaggen', 'nachbarlaender', 'bayern'];
+            const mixCats = ['bundeslaender', 'europa', 'europa_flaggen', 'nachbarlaender', 'bayern', 'bayerischefluesze'];
             const allQuestions = mixCats.flatMap(cat => Array.isArray(quizData[cat]) ? quizData[cat] : []);
             if (allQuestions.length === 0) {
                 console.warn('Mix mode: keine Fragen gefunden. Prüfe quizData.');
@@ -40,12 +40,23 @@ class GameEngine {
         this.gameState.nextQuestion();
     }
 
-    checkAnswer(isCorrect) {
-        if (isCorrect) {
-            this.gameState.incrementScore();
-            this.gameState.incrementCorrect();
+    checkAnswer(isCorrect, correctCount = null, wrongCount = null) {
+        if (correctCount !== null && wrongCount !== null) {
+            // Fill blanks: track individual answers and score proportionally
+            this.gameState.addCorrect(correctCount);
+            this.gameState.addWrong(wrongCount);
+            // Add score based on number of correct answers
+            for (let i = 0; i < correctCount; i++) {
+                this.gameState.incrementScore();
+            }
         } else {
-            this.gameState.incrementWrong();
+            // Multiple choice: track as single answer
+            if (isCorrect) {
+                this.gameState.incrementScore();
+                this.gameState.incrementCorrect();
+            } else {
+                this.gameState.incrementWrong();
+            }
         }
     }
 

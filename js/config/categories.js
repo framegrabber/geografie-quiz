@@ -24,6 +24,12 @@ const CATEGORIES = {
         description: 'Regierungsbezirke Bayerns',
         color: 'bg-purple-500 hover:bg-purple-600'
     },
+    bayerischefluesze: {
+        id: 'bayerischefluesze',
+        name: '🌊 Bayerische Flüsse',
+        description: 'Flüsse und Merkspruch',
+        color: 'bg-cyan-500 hover:bg-cyan-600'
+    },
     mix: {
         id: 'mix',
         name: '🎲 Mix-Modus',
@@ -37,7 +43,8 @@ const CATEGORY_BADGE_COLORS = {
     'Bundesländer': 'bg-blue-100 text-blue-800',
     'Europa': 'bg-green-100 text-green-800',
     'Nachbarländer': 'bg-orange-100 text-orange-800',
-    'Bayern': 'bg-purple-100 text-purple-800'
+    'Bayern': 'bg-purple-100 text-purple-800',
+    'Bayerische Flüsse': 'bg-cyan-100 text-cyan-800'
 };
 
 // Category display names for statistics
@@ -46,5 +53,6 @@ const CATEGORY_DISPLAY_NAMES = {
     europa: '🇪🇺 Europäische Länder',
     nachbarlaender: '🤝 Deutsche Nachbarländer',
     bayern: '🏔️ Bayerische Bezirke',
+    bayerischefluesze: '🌊 Bayerische Flüsse',
     mix: '🎲 Mix-Modus'
 };

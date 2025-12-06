@@ -37,6 +37,9 @@ class EventManager {
             if (isCorrect === 'map') {
                 // Map question - delegate to map renderer
                 this.mapRenderer.render(args[0], args[1]);
+            } else if (typeof isCorrect === 'object' && isCorrect.isCorrect !== undefined) {
+                // Fill blanks answer with individual counts
+                this.handleAnswer(isCorrect.isCorrect, isCorrect.correct, isCorrect.wrong);
             } else {
                 // Multiple choice answer
                 this.handleAnswer(isCorrect);
@@ -55,8 +58,8 @@ class EventManager {
         this.updateQuizDisplay();
     }
 
-    handleAnswer(isCorrect) {
-        this.gameEngine.checkAnswer(isCorrect);
+    handleAnswer(isCorrect, correctCount = null, wrongCount = null) {
+        this.gameEngine.checkAnswer(isCorrect, correctCount, wrongCount);
         this.updateQuizStats();
         this.uiUpdater.showNextButton();
     }

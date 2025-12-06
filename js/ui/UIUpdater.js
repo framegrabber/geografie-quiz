@@ -21,7 +21,8 @@ class UIUpdater {
     updateCategoryGames(stats) {
         this.elements.categoryGames.forEach(span => {
             const cat = span.dataset.cat;
-            updateElementText(span, stats.categories[cat].games);
+            const games = stats.categories[cat] ? stats.categories[cat].games : 0;
+            updateElementText(span, games);
         });
     }
 

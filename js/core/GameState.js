@@ -48,6 +48,14 @@ class GameState {
         this.wrongAnswers++;
     }
 
+    addCorrect(count) {
+        this.correctAnswers += count;
+    }
+
+    addWrong(count) {
+        this.wrongAnswers += count;
+    }
+
     // Getters
     getCategory() {
         return this.currentCategory;
