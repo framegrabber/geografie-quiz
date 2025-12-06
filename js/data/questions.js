@@ -1,6 +1,7 @@
 // Quiz Questions Data - Echte Daten aus Wikipedia
 const quizData = {
     bundeslaender: [
+        // Bayern
         {
             question: "Was ist die Hauptstadt von Bayern?",
             answers: ["Nürnberg", "Augsburg", "München", "Regensburg"],
@@ -15,12 +16,36 @@ const quizData = {
             category: "Bundesländer"
         },
         {
-            question: "Welches ist das flächenmäßig größte Bundesland?",
-            answers: ["Niedersachsen", "Bayern", "Baden-Württemberg", "Nordrhein-Westfalen"],
+            question: "München ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Hessen", "Baden-Württemberg", "Bayern", "Sachsen"],
             correctAnswer: "Bayern",
             type: "multiple",
             category: "Bundesländer"
         },
+
+        // Baden-Württemberg
+        {
+            question: "Was ist die Hauptstadt von Baden-Württemberg?",
+            answers: ["Karlsruhe", "Stuttgart", "Mannheim", "Freiburg"],
+            correctAnswer: "Stuttgart",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+        {
+            question: "Wo ist Baden-Württemberg auf der Karte?",
+            correctAnswer: "Baden-Württemberg",
+            type: "map",
+            category: "Bundesländer"
+        },
+        {
+            question: "Stuttgart ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Bayern", "Hessen", "Baden-Württemberg", "Nordrhein-Westfalen"],
+            correctAnswer: "Baden-Württemberg",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Nordrhein-Westfalen
         {
             question: "Was ist die Hauptstadt von Nordrhein-Westfalen?",
             answers: ["Köln", "Düsseldorf", "Dortmund", "Essen"],
@@ -29,28 +54,46 @@ const quizData = {
             category: "Bundesländer"
         },
         {
-            question: "Wo ist Schleswig-Holstein auf der Karte?",
-            correctAnswer: "Schleswig-Holstein",
+            question: "Wo ist Nordrhein-Westfalen auf der Karte?",
+            correctAnswer: "Nordrhein-Westfalen",
             type: "map",
             category: "Bundesländer"
         },
         {
-            question: "Welche der folgenden Bundesländer sind Stadtstaaten?",
-            answers: ["Saarland", "Hamburg", "Bremen", "Berlin"],
-            correctAnswer: ["Hamburg", "Bremen", "Berlin"],
+            question: "Düsseldorf ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Nordrhein-Westfalen", "Niedersachsen", "Hessen", "Rheinland-Pfalz"],
+            correctAnswer: "Nordrhein-Westfalen",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Hessen
+        {
+            question: "Was ist die Hauptstadt von Hessen?",
+            answers: ["Frankfurt am Main", "Wiesbaden", "Kassel", "Darmstadt"],
+            correctAnswer: "Wiesbaden",
             type: "multiple",
             category: "Bundesländer"
         },
         {
-            question: "Wo ist Sachsen auf der Karte?",
-            correctAnswer: "Sachsen",
+            question: "Wo ist Hessen auf der Karte?",
+            correctAnswer: "Hessen",
             type: "map",
             category: "Bundesländer"
         },
         {
-            question: "Was ist die Hauptstadt von Baden-Württemberg?",
-            answers: ["Karlsruhe", "Stuttgart", "Mannheim", "Freiburg"],
-            correctAnswer: "Stuttgart",
+            question: "Wiesbaden ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Rheinland-Pfalz", "Hessen", "Nordrhein-Westfalen", "Thüringen"],
+            correctAnswer: "Hessen",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Rheinland-Pfalz
+        {
+            question: "Was ist die Hauptstadt von Rheinland-Pfalz?",
+            answers: ["Trier", "Mainz", "Ludwigshafen", "Worms"],
+            correctAnswer: "Mainz",
             type: "multiple",
             category: "Bundesländer"
         },
@@ -61,9 +104,40 @@ const quizData = {
             category: "Bundesländer"
         },
         {
-            question: "Was ist die Hauptstadt von Hessen?",
-            answers: ["Frankfurt am Main", "Wiesbaden", "Kassel", "Darmstadt"],
-            correctAnswer: "Wiesbaden",
+            question: "Mainz ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Hessen", "Rheinland-Pfalz", "Baden-Württemberg", "Bayern"],
+            correctAnswer: "Rheinland-Pfalz",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Sachsen
+        {
+            question: "Was ist die Hauptstadt von Sachsen?",
+            answers: ["Leipzig", "Dresden", "Chemnitz", "Zwickau"],
+            correctAnswer: "Dresden",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+        {
+            question: "Wo ist Sachsen auf der Karte?",
+            correctAnswer: "Sachsen",
+            type: "map",
+            category: "Bundesländer"
+        },
+        {
+            question: "Dresden ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Sachsen", "Sachsen-Anhalt", "Thüringen", "Brandenburg"],
+            correctAnswer: "Sachsen",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Niedersachsen
+        {
+            question: "Was ist die Hauptstadt von Niedersachsen?",
+            answers: ["Hannover", "Braunschweig", "Oldenburg", "Osnabrück"],
+            correctAnswer: "Hannover",
             type: "multiple",
             category: "Bundesländer"
         },
@@ -74,9 +148,202 @@ const quizData = {
             category: "Bundesländer"
         },
         {
-            question: "Was ist die Hauptstadt von Sachsen?",
-            answers: ["Leipzig", "Dresden", "Chemnitz", "Zwickau"],
-            correctAnswer: "Dresden",
+            question: "Hannover ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Schleswig-Holstein", "Niedersachsen", "Mecklenburg-Vorpommern", "Bremen"],
+            correctAnswer: "Niedersachsen",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Schleswig-Holstein
+        {
+            question: "Was ist die Hauptstadt von Schleswig-Holstein?",
+            answers: ["Kiel", "Lübeck", "Flensburg", "Neumünster"],
+            correctAnswer: "Kiel",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+        {
+            question: "Wo ist Schleswig-Holstein auf der Karte?",
+            correctAnswer: "Schleswig-Holstein",
+            type: "map",
+            category: "Bundesländer"
+        },
+        {
+            question: "Kiel ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Niedersachsen", "Mecklenburg-Vorpommern", "Schleswig-Holstein", "Hamburg"],
+            correctAnswer: "Schleswig-Holstein",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Thüringen
+        {
+            question: "Was ist die Hauptstadt von Thüringen?",
+            answers: ["Jena", "Erfurt", "Weimar", "Gera"],
+            correctAnswer: "Erfurt",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+        {
+            question: "Wo ist Thüringen auf der Karte?",
+            correctAnswer: "Thüringen",
+            type: "map",
+            category: "Bundesländer"
+        },
+        {
+            question: "Erfurt ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Sachsen", "Thüringen", "Sachsen-Anhalt", "Hessen"],
+            correctAnswer: "Thüringen",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Sachsen-Anhalt
+        {
+            question: "Was ist die Hauptstadt von Sachsen-Anhalt?",
+            answers: ["Halle", "Magdeburg", "Dessau", "Wittenberg"],
+            correctAnswer: "Magdeburg",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+        {
+            question: "Wo ist Sachsen-Anhalt auf der Karte?",
+            correctAnswer: "Sachsen-Anhalt",
+            type: "map",
+            category: "Bundesländer"
+        },
+        {
+            question: "Magdeburg ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Sachsen", "Sachsen-Anhalt", "Brandenburg", "Niedersachsen"],
+            correctAnswer: "Sachsen-Anhalt",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Mecklenburg-Vorpommern
+        {
+            question: "Was ist die Hauptstadt von Mecklenburg-Vorpommern?",
+            answers: ["Rostock", "Schwerin", "Greifswald", "Wismar"],
+            correctAnswer: "Schwerin",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+        {
+            question: "Wo ist Mecklenburg-Vorpommern auf der Karte?",
+            correctAnswer: "Mecklenburg-Vorpommern",
+            type: "map",
+            category: "Bundesländer"
+        },
+        {
+            question: "Schwerin ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Schleswig-Holstein", "Mecklenburg-Vorpommern", "Brandenburg", "Niedersachsen"],
+            correctAnswer: "Mecklenburg-Vorpommern",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Brandenburg
+        {
+            question: "Was ist die Hauptstadt von Brandenburg?",
+            answers: ["Cottbus", "Potsdam", "Frankfurt an der Oder", "Bernau"],
+            correctAnswer: "Potsdam",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+        {
+            question: "Wo ist Brandenburg auf der Karte?",
+            correctAnswer: "Brandenburg",
+            type: "map",
+            category: "Bundesländer"
+        },
+        {
+            question: "Potsdam ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Sachsen-Anhalt", "Brandenburg", "Berlin", "Sachsen"],
+            correctAnswer: "Brandenburg",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Saarland
+        {
+            question: "Was ist die Hauptstadt von Saarland?",
+            answers: ["Neunkirchen", "Saarbrücken", "Merzig", "Saarlouis"],
+            correctAnswer: "Saarbrücken",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+        {
+            question: "Wo ist Saarland auf der Karte?",
+            correctAnswer: "Saarland",
+            type: "map",
+            category: "Bundesländer"
+        },
+        {
+            question: "Saarbrücken ist die Hauptstadt von welchem Bundesland?",
+            answers: ["Rheinland-Pfalz", "Saarland", "Baden-Württemberg", "Hessen"],
+            correctAnswer: "Saarland",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Berlin
+        {
+            question: "Wo ist Berlin auf der Karte?",
+            correctAnswer: "Berlin",
+            type: "map",
+            category: "Bundesländer"
+        },
+        {
+            question: "Berlin ist ein Stadtstaat. Wie heißen die anderen Stadtstaaten?",
+            answers: ["Köln und München", "Hamburg und Bremen", "Düsseldorf und Frankfurt", "Stuttgart und Hannover"],
+            correctAnswer: "Hamburg und Bremen",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+
+        // Hamburg
+        {
+            question: "Wo ist Hamburg auf der Karte?",
+            correctAnswer: "Hamburg",
+            type: "map",
+            category: "Bundesländer"
+        },
+
+        // Bremen
+        {
+            question: "Wo ist Bremen auf der Karte?",
+            correctAnswer: "Bremen",
+            type: "map",
+            category: "Bundesländer"
+        },
+
+        // Allgemeine Fragen
+        {
+            question: "Welche der folgenden Bundesländer sind Stadtstaaten?",
+            answers: ["Saarland", "Hamburg", "Bremen", "Berlin"],
+            correctAnswer: ["Hamburg", "Bremen", "Berlin"],
+            type: "multiple",
+            category: "Bundesländer"
+        },
+        {
+            question: "Wie viele Bundesländer hat Deutschland?",
+            answers: ["14", "15", "16", "17"],
+            correctAnswer: "16",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+        {
+            question: "Welches ist das flächenmäßig größte Bundesland?",
+            answers: ["Niedersachsen", "Bayern", "Baden-Württemberg", "Nordrhein-Westfalen"],
+            correctAnswer: "Bayern",
+            type: "multiple",
+            category: "Bundesländer"
+        },
+        {
+            question: "Welches Bundesland ist bevölkerungsreichste?",
+            answers: ["Bayern", "Nordrhein-Westfalen", "Baden-Württemberg", "Niedersachsen"],
+            correctAnswer: "Nordrhein-Westfalen",
             type: "multiple",
             category: "Bundesländer"
         }
