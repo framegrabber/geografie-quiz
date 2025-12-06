@@ -584,7 +584,7 @@ const quizData = {
         },
         {
             question: "Wo liegt Tschechien auf der Karte?",
-            correctAnswer: "Czechia",
+            correctAnswer: "Czech Republic",
             type: "map",
             category: "Europa"
         },
