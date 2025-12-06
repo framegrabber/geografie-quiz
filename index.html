@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geografie-Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-8 text-center relative">
+                <h1 class="text-4xl font-bold mb-2">🌍 Geografie-Quiz 🌍</h1>
+                <p class="text-xl">Teste dein Wissen über Deutschland und Europa!</p>
+                <button id="statsBtn" class="absolute top-4 right-4 bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded-lg transition">
+                    📊 Statistiken
+                </button>
+            </div>
+
+            <!-- Category Selection Screen -->
+            <div id="categoryScreen" class="p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Wähle eine Kategorie:</h2>
+                
+                <!-- Quick Stats Overview -->
+                <div id="quickStats" class="mb-6 p-4 bg-blue-50 rounded-lg">
+                    <div class="text-center text-sm text-gray-600">
+                        <span class="font-semibold">Gespielte Quizze: <span id="totalGames">0</span></span> | 
+                        <span class="font-semibold">Gesamtpunkte: <span id="totalPoints">0</span></span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button class="category-btn bg-blue-500 hover:bg-blue-600 text-white p-6 rounded-xl font-bold text-lg" data-category="bundeslaender">
+                        🏰 Deutsche Bundesländer
+                        <p class="text-sm font-normal mt-2">Hauptstädte, Flächen und Lage</p>
+                        <p class="text-xs mt-1 opacity-75">Gespielt: <span class="category-games" data-cat="bundeslaender">0</span>x</p>
+                    </button>
+                    <button class="category-btn bg-green-500 hover:bg-green-600 text-white p-6 rounded-xl font-bold text-lg" data-category="europa">
+                        🇪🇺 Europäische Länder
+                        <p class="text-sm font-normal mt-2">Hauptstädte und Geografie</p>
+                        <p class="text-xs mt-1 opacity-75">Gespielt: <span class="category-games" data-cat="europa">0</span>x</p>
+                    </button>
+                    <button class="category-btn bg-orange-500 hover:bg-orange-600 text-white p-6 rounded-xl font-bold text-lg" data-category="nachbarlaender">
+                        🤝 Deutsche Nachbarländer
+                        <p class="text-sm font-normal mt-2">Grenzen und Hauptstädte</p>
+                        <p class="text-xs mt-1 opacity-75">Gespielt: <span class="category-games" data-cat="nachbarlaender">0</span>x</p>
+                    </button>
+                    <button class="category-btn bg-purple-500 hover:bg-purple-600 text-white p-6 rounded-xl font-bold text-lg" data-category="bayern">
+                        🏔️ Bayerische Bezirke
+                        <p class="text-sm font-normal mt-2">Regierungsbezirke Bayerns</p>
+                        <p class="text-xs mt-1 opacity-75">Gespielt: <span class="category-games" data-cat="bayern">0</span>x</p>
+                    </button>
+                    <button class="category-btn bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 text-white p-6 rounded-xl font-bold text-lg md:col-span-2" data-category="mix">
+                        🎲 Mix-Modus
+                        <p class="text-sm font-normal mt-2">Fragen aus allen Kategorien</p>
+                        <p class="text-xs mt-1 opacity-75">Gespielt: <span class="category-games" data-cat="mix">0</span>x</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Statistics Screen -->
+            <div id="statsScreen" class="hidden p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800">📊 Deine Statistiken</h2>
+                    <button id="closeStatsBtn" class="text-gray-600 hover:text-gray-800 text-2xl">✕</button>
+                </div>
+
+                <!-- Overall Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div class="stat-card bg-blue-50 p-4 rounded-lg text-center">
+                        <p class="text-sm text-gray-600 mb-1">Gespielte Quizze</p>
+                        <p id="statTotalGames" class="text-3xl font-bold text-blue-600">0</p>
+                    </div>
+                    <div class="stat-card bg-green-50 p-4 rounded-lg text-center">
+                        <p class="text-sm text-gray-600 mb-1">Gesamtpunkte</p>
+                        <p id="statTotalPoints" class="text-3xl font-bold text-green-600">0</p>
+                    </div>
+                    <div class="stat-card bg-yellow-50 p-4 rounded-lg text-center">
+                        <p class="text-sm text-gray-600 mb-1">Richtige Antworten</p>
+                        <p id="statTotalCorrect" class="text-3xl font-bold text-yellow-600">0</p>
+                    </div>
+                    <div class="stat-card bg-red-50 p-4 rounded-lg text-center">
+                        <p class="text-sm text-gray-600 mb-1">Falsche Antworten</p>
+                        <p id="statTotalWrong" class="text-3xl font-bold text-red-600">0</p>
+                    </div>
+                </div>
+
+                <!-- Average Score -->
+                <div class="mb-8 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+                    <div class="text-center">
+                        <p class="text-sm text-gray-600 mb-2">Durchschnittliche Punktzahl</p>
+                        <p id="statAverage" class="text-4xl font-bold text-purple-600">0.0</p>
+                        <p class="text-sm text-gray-500 mt-1">von 10 Punkten</p>
+                    </div>
+                </div>
+
+                <!-- Category Stats -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Statistiken pro Kategorie</h3>
+                    <div class="space-y-4" id="categoryStatsContainer"></div>
+                </div>
+
+                <!-- Best/Worst Performance -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-bold text-green-800 mb-4">🏆 Beste Leistung</h3>
+                        <div id="bestPerformance" class="space-y-2"></div>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-bold text-red-800 mb-4">📉 Verbesserungspotenzial</h3>
+                        <div id="worstPerformance" class="space-y-2"></div>
+                    </div>
+                </div>
+
+                <!-- Reset Stats -->
+                <div class="text-center">
+                    <button id="resetStatsBtn" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-semibold transition">
+                        🗑️ Statistiken zurücksetzen
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div id="quizScreen" class="hidden p-8">
+                <button id="backBtn" class="mb-4 text-blue-600 hover:text-blue-800 font-semibold">
+                    ← Zurück zur Kategorieauswahl
+                </button>
+                
+                <div class="mb-6">
+                    <div class="flex justify-between text-sm text-gray-600 mb-2">
+                        <span id="questionNumber">Frage 1 von 10</span>
+                        <span id="scoreDisplay">Punkte: 0</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="progressBar" class="bg-blue-600 h-2 rounded-full transition-all" style="width: 10%"></div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <span id="categoryBadge" class="inline-block px-4 py-1 rounded-full text-sm font-semibold"></span>
+                </div>
+
+                <div class="mb-8">
+                    <h2 id="questionText" class="text-2xl font-bold text-gray-800 mb-6"></h2>
+                    <div id="answerContainer" class="space-y-3"></div>
+                    <div id="mapContainer" class="hidden mt-6"></div>
+                    <p id="mapInstruction" class="hidden text-center text-gray-600 mt-4 font-semibold">
+                        Klicke auf die richtige Region auf der Karte!
+                    </p>
+                </div>
+
+                <button id="nextBtn" class="hidden w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition">
+                    Weiter →
+                </button>
+
+                <div class="flex justify-around mt-6 text-center">
+                    <div>
+                        <p class="text-sm text-gray-600">Richtige Antworten</p>
+                        <p id="correctCount" class="text-2xl font-bold text-green-600">0</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Falsche Antworten</p>
+                        <p id="wrongCount" class="text-2xl font-bold text-red-600">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- End Screen -->
+            <div id="endScreen" class="hidden p-8 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Quiz beendet!</h2>
+                <p class="text-xl text-gray-600 mb-6">Du hast <span id="finalScore" class="font-bold text-blue-600"></span> von 10 Punkten erreicht!</p>
+                
+                <div class="grid grid-cols-2 gap-4 mb-8 max-w-md mx-auto">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <p class="text-sm text-gray-600">Richtig</p>
+                        <p id="finalCorrect" class="text-3xl font-bold text-green-600">0</p>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <p class="text-sm text-gray-600">Falsch</p>
+                        <p id="finalWrong" class="text-3xl font-bold text-red-600">0</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <button id="restartBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-xl transition">
+                        Nochmal mit dieser Kategorie! 🔄
+                    </button>
+                    <button id="newCategoryBtn" class="w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-lg text-xl transition">
+                        Neue Kategorie wählen 🌍
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script>
+        // Statistics Management
+        class StatsManager {
+            constructor() {
+                this.stats = this.loadStats();
+            }
+
+            loadStats() {
+                const saved = this.getCookie('quizStats');
+                if (saved) {
+                    try {
+                        return JSON.parse(saved);
+                    } catch (e) {
+                        return this.getDefaultStats();
+                    }
+                }
+                return this.getDefaultStats();
+            }
+
+            getDefaultStats() {
+                return {
+                    totalGames: 0,
+                    totalPoints: 0,
+                    totalCorrect: 0,
+                    totalWrong: 0,
+                    categories: {
+                        bundeslaender: { games: 0, points: 0, correct: 0, wrong: 0 },
+                        europa: { games: 0, points: 0, correct: 0, wrong: 0 },
+                        nachbarlaender: { games: 0, points: 0, correct: 0, wrong: 0 },
+                        bayern: { games: 0, points: 0, correct: 0, wrong: 0 },
+                        mix: { games: 0, points: 0, correct: 0, wrong: 0 }
+                    }
+                };
+            }
+
+            saveStats() {
+                const json = JSON.stringify(this.stats);
+                this.setCookie('quizStats', json, 365);
+            }
+
+            addGameResult(category, score, correct, wrong) {
+                this.stats.totalGames++;
+                this.stats.totalPoints += score;
+                this.stats.totalCorrect += correct;
+                this.stats.totalWrong += wrong;
+
+                if (this.stats.categories[category]) {
+                    this.stats.categories[category].games++;
+                    this.stats.categories[category].points += score;
+                    this.stats.categories[category].correct += correct;
+                    this.stats.categories[category].wrong += wrong;
+                }
+
+                this.saveStats();
+            }
+
+            reset() {
+                this.stats = this.getDefaultStats();
+                this.saveStats();
+            }
+
+            getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+                return null;
+            }
+
+            setCookie(name, value, days) {
+                const expires = new Date();
+                expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+                document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+            }
+        }
+
+        const statsManager = new StatsManager();
+
+        // Game State
+        let currentCategory = '';
+        let currentQuestions = [];
+        let currentQuestion = 0;
+        let score = 0;
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+
+        // DOM Elements
+        const categoryScreen = document.getElementById('categoryScreen');
+        const quizScreen = document.getElementById('quizScreen');
+        const endScreen = document.getElementById('endScreen');
+        const statsScreen = document.getElementById('statsScreen');
+        const backBtn = document.getElementById('backBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const newCategoryBtn = document.getElementById('newCategoryBtn');
+        const statsBtn = document.getElementById('statsBtn');
+        const closeStatsBtn = document.getElementById('closeStatsBtn');
+        const resetStatsBtn = document.getElementById('resetStatsBtn');
+        const questionText = document.getElementById('questionText');
+        const answerContainer = document.getElementById('answerContainer');
+        const mapContainer = document.getElementById('mapContainer');
+        const mapInstruction = document.getElementById('mapInstruction');
+        const questionNumber = document.getElementById('questionNumber');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const progressBar = document.getElementById('progressBar');
+        const correctCount = document.getElementById('correctCount');
+        const wrongCount = document.getElementById('wrongCount');
+        const categoryBadge = document.getElementById('categoryBadge');
+
+        // Initialize
+        updateQuickStats();
+        updateCategoryGames();
+
+        // Event Listeners
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const category = e.currentTarget.dataset.category;
+                selectCategory(category);
+            });
+        });
+
+        backBtn.addEventListener('click', backToCategories);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+        newCategoryBtn.addEventListener('click', backToCategories);
+        statsBtn.addEventListener('click', showStats);
+        closeStatsBtn.addEventListener('click', closeStats);
+        resetStatsBtn.addEventListener('click', resetStats);
+
+        function updateQuickStats() {
+            document.getElementById('totalGames').textContent = statsManager.stats.totalGames;
+            document.getElementById('totalPoints').textContent = statsManager.stats.totalPoints;
+        }
+
+        function updateCategoryGames() {
+            document.querySelectorAll('.category-games').forEach(span => {
+                const cat = span.dataset.cat;
+                span.textContent = statsManager.stats.categories[cat].games;
+            });
+        }
+
+        function selectCategory(category) {
+            currentCategory = category;
+            
+            if (category === 'mix') {
+                const allQuestions = [
+                    ...quizData.bundeslaender,
+                    ...quizData.europa,
+                    ...quizData.nachbarlaender,
+                    ...quizData.bayern
+                ];
+                currentQuestions = shuffleArray(allQuestions).slice(0, 10);
+            } else {
+                currentQuestions = shuffleArray([...quizData[category]]).slice(0, 10);
+            }
+            
+            startQuiz();
+        }
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function startQuiz() {
+            categoryScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+            currentQuestion = 0;
+            score = 0;
+            correctAnswers = 0;
+            wrongAnswers = 0;
+            updateStats();
+            showQuestion();
+        }
+
+        function backToCategories() {
+            quizScreen.classList.add('hidden');
+            endScreen.classList.add('hidden');
+            categoryScreen.classList.remove('hidden');
+            updateQuickStats();
+            updateCategoryGames();
+        }
+
+        function showQuestion() {
+            const question = currentQuestions[currentQuestion];
+            questionText.textContent = question.question;
+            questionNumber.textContent = `Frage ${currentQuestion + 1} von ${currentQuestions.length}`;
+            progressBar.style.width = `${((currentQuestion + 1) / currentQuestions.length) * 100}%`;
+            nextBtn.classList.add('hidden');
+
+            const categoryColors = {
+                'Bundesländer': 'bg-blue-100 text-blue-800',
+                'Europa': 'bg-green-100 text-green-800',
+                'Nachbarländer': 'bg-orange-100 text-orange-800',
+                'Bayern': 'bg-purple-100 text-purple-800'
+            };
+            categoryBadge.textContent = question.category;
+            categoryBadge.className = `inline-block px-4 py-1 rounded-full text-sm font-semibold ${categoryColors[question.category]}`;
+
+            if (question.type === 'multiple') {
+                showMultipleChoice(question);
+            } else if (question.type === 'map') {
+                showMapQuestion(question);
+            }
+        }
+
+        function showMultipleChoice(question) {
+            mapContainer.classList.add('hidden');
+            mapInstruction.classList.add('hidden');
+            answerContainer.classList.remove('hidden');
+            answerContainer.innerHTML = '';
+
+            question.answers.forEach(answer => {
+                const button = document.createElement('button');
+                button.textContent = answer;
+                button.className = 'w-full p-4 text-left rounded-lg border-2 border-gray-300 hover:border-blue-500 hover:bg-blue-50 transition';
+                button.addEventListener('click', () => checkMultipleChoice(answer, button, question.correctAnswer));
+                answerContainer.appendChild(button);
+            });
+        }
+
+        function checkMultipleChoice(selected, button, correct) {
+            const buttons = answerContainer.querySelectorAll('button');
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (selected === correct) {
+                button.classList.add('bg-green-100', 'border-green-500');
+                score++;
+                correctAnswers++;
+            } else {
+                button.classList.add('bg-red-100', 'border-red-500');
+                wrongAnswers++;
+                buttons.forEach(btn => {
+                    if (btn.textContent === correct) {
+                        btn.classList.add('bg-green-100', 'border-green-500');
+                    }
+                });
+            }
+
+            updateStats();
+            nextBtn.classList.remove('hidden');
+        }
+
+        function showMapQuestion(question) {
+            answerContainer.classList.add('hidden');
+            mapContainer.classList.remove('hidden');
+            mapInstruction.classList.remove('hidden');
+            mapContainer.innerHTML = '';
+
+            renderMap(question.correctAnswer, question.category);
+        }
+
+        function renderMap(correctAnswer, category) {
+            const width = 600;
+            const height = 750;
+            
+            let mapCategory = 'bundeslaender';
+            if (category === 'Europa') mapCategory = 'europa';
+            else if (category === 'Nachbarländer') mapCategory = 'nachbarlaender';
+            else if (category === 'Bayern') mapCategory = 'bayern';
+            
+            const config = mapConfig[mapCategory];
+
+            const svg = d3.select("#mapContainer")
+                .append("svg")
+                .attr("viewBox", `0 0 ${width} ${height}`)
+                .attr("class", "w-full border-2 border-gray-300 rounded-lg bg-white");
+
+            const loading = svg.append("g")
+                .attr("transform", `translate(${width/2}, ${height/2})`);
+            
+            loading.append("text")
+                .attr("text-anchor", "middle")
+                .attr("fill", "#666")
+                .text("Karte wird geladen...");
+
+            const projection = d3[config.projection.type]()
+                .center(config.projection.center)
+                .scale(config.projection.scale)
+                .translate([width / 2, height / 2]);
+
+            const path = d3.geoPath().projection(projection);
+
+            d3.json(config.url)
+                .then(data => {
+                    loading.remove();
+                    
+                    let features = data.features;
+                    
+                    // Filter for Bayern regions
+
+
+                    if (mapCategory === 'bayern' && config.filterRegions) {
+    features = features.filter(f => {
+        const regionName = f.properties[config.nameProperty];
+        const stateName = f.properties.NAME_1; // Prüfe auch das Bundesland
+        return stateName === 'Bayern' && config.filterRegions.some(region => 
+            regionName && regionName.includes(region)
+        );
+    });
+
+                        
+                        // Map region names
+                        features.forEach(f => {
+                            const originalName = f.properties[config.nameProperty];
+                            for (let region of config.filterRegions) {
+                                if (originalName.toLowerCase().includes(region.toLowerCase())) {
+                                    f.properties.displayName = region;
+                                    break;
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Filter for neighbor countries
+                    if (config.filterCountries) {
+                        features = features.filter(f => 
+                            config.filterCountries.includes(f.properties[config.nameProperty])
+                        );
+                    }
+
+                    const colors = ['#FFE5B4', '#E0F2F7', '#F0E68C', '#DDA0DD', '#B0E0E6', 
+                                  '#FFB6C1', '#F5DEB3', '#D3D3D3', '#FFA07A', '#98FB98',
+                                  '#FFDAB9', '#E6E6FA', '#FFE4E1', '#F0FFF0', '#FFF5EE', '#F5F5DC'];
+                    
+                    svg.selectAll('.region')
+                        .data(features)
+                        .enter()
+                        .append('path')
+                        .attr('class', 'region')
+                        .attr('d', path)
+                        .attr('fill', (d, i) => colors[i % colors.length])
+                        .attr('data-name', d => d.properties.displayName || d.properties[config.nameProperty])
+                        .on('click', function(event, d) {
+                            const regionName = d.properties.displayName || d.properties[config.nameProperty];
+                            handleMapClick(regionName, this, correctAnswer);
+                        });
+                })
+                .catch(error => {
+                    console.error('Fehler beim Laden der Karte:', error);
+                    loading.remove();
+                    svg.append("text")
+                        .attr("x", width/2)
+                        .attr("y", height/2)
+                        .attr("text-anchor", "middle")
+                        .attr("fill", "red")
+                        .text("Fehler beim Laden der Karte");
+                });
+        }
+
+        function handleMapClick(selectedRegion, element, correctAnswer) {
+            const allRegions = document.querySelectorAll('.region');
+            allRegions.forEach(region => region.style.pointerEvents = 'none');
+
+            if (selectedRegion === correctAnswer) {
+                d3.select(element).classed('correct', true);
+                score++;
+                correctAnswers++;
+            } else {
+                d3.select(element).classed('incorrect', true);
+                wrongAnswers++;
+
+                d3.selectAll('.region')
+                    .filter(function() {
+                        return d3.select(this).attr('data-name') === correctAnswer;
+                    })
+                    .classed('correct', true);
+            }
+
+            updateStats();
+            nextBtn.classList.remove('hidden');
+        }
+
+        function updateStats() {
+            scoreDisplay.textContent = `Punkte: ${score}`;
+            correctCount.textContent = correctAnswers;
+            wrongCount.textContent = wrongAnswers;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+
+            if (currentQuestion < currentQuestions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            statsManager.addGameResult(currentCategory, score, correctAnswers, wrongAnswers);
+            
+            quizScreen.classList.add('hidden');
+            endScreen.classList.remove('hidden');
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('finalCorrect').textContent = correctAnswers;
+            document.getElementById('finalWrong').textContent = wrongAnswers;
+        }
+
+        function restartQuiz() {
+            endScreen.classList.add('hidden');
+            selectCategory(currentCategory);
+        }
+
+        function showStats() {
+            categoryScreen.classList.add('hidden');
+            statsScreen.classList.remove('hidden');
+            renderStats();
+        }
+
+        function closeStats() {
+            statsScreen.classList.add('hidden');
+            categoryScreen.classList.remove('hidden');
+        }
+
+        function renderStats() {
+            const stats = statsManager.stats;
+            
+            document.getElementById('statTotalGames').textContent = stats.totalGames;
+            document.getElementById('statTotalPoints').textContent = stats.totalPoints;
+            document.getElementById('statTotalCorrect').textContent = stats.totalCorrect;
+            document.getElementById('statTotalWrong').textContent = stats.totalWrong;
+            
+            const average = stats.totalGames > 0 ? (stats.totalPoints / stats.totalGames).toFixed(1) : '0.0';
+            document.getElementById('statAverage').textContent = average;
+
+            const categoryStatsContainer = document.getElementById('categoryStatsContainer');
+            categoryStatsContainer.innerHTML = '';
+
+            const categoryNames = {
+                bundeslaender: '🏰 Deutsche Bundesländer',
+                europa: '🇪🇺 Europäische Länder',
+                nachbarlaender: '🤝 Deutsche Nachbarländer',
+                bayern: '🏔️ Bayerische Bezirke',
+                mix: '🎲 Mix-Modus'
+            };
+
+            Object.entries(stats.categories).forEach(([key, data]) => {
+                if (data.games > 0) {
+                    const avg = (data.points / data.games).toFixed(1);
+                    const accuracy = ((data.correct / (data.correct + data.wrong)) * 100).toFixed(0);
+                    
+                    const catDiv = document.createElement('div');
+                    catDiv.className = 'bg-gray-50 p-4 rounded-lg';
+                    catDiv.innerHTML = `
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-semibold text-gray-800">${categoryNames[key]}</h4>
+                            <span class="text-sm text-gray-600">${data.games} Spiele</span>
+                        </div>
+                        <div class="grid grid-cols-4 gap-2 text-center text-sm">
+                            <div>
+                                <p class="text-gray-600">Punkte</p>
+                                <p class="font-bold text-blue-600">${data.points}</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Ø</p>
+                                <p class="font-bold text-purple-600">${avg}</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Richtig</p>
+                                <p class="font-bold text-green-600">${data.correct}</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Genauigkeit</p>
+                                <p class="font-bold text-orange-600">${accuracy}%</p>
+                            </div>
+                        </div>
+                    `;
+                    categoryStatsContainer.appendChild(catDiv);
+                }
+            });
+
+            renderPerformance();
+        }
+
+        function renderPerformance() {
+            const stats = statsManager.stats;
+            const bestPerf = document.getElementById('bestPerformance');
+            const worstPerf = document.getElementById('worstPerformance');
+
+            const categoryNames = {
+                bundeslaender: 'Deutsche Bundesländer',
+                europa: 'Europäische Länder',
+                nachbarlaender: 'Deutsche Nachbarländer',
+                bayern: 'Bayerische Bezirke',
+                mix: 'Mix-Modus'
+            };
+
+            const averages = Object.entries(stats.categories)
+                .filter(([key, data]) => data.games > 0)
+                .map(([key, data]) => ({
+                    name: categoryNames[key],
+                    average: data.points / data.games,
+                    accuracy: (data.correct / (data.correct + data.wrong)) * 100
+                }))
+                .sort((a, b) => b.average - a.average);
+
+            if (averages.length > 0) {
+                bestPerf.innerHTML = `
+                    <div class="text-sm">
+                        <p class="font-semibold">${averages[0].name}</p>
+                        <p class="text-gray-600">Durchschnitt: ${averages[0].average.toFixed(1)} Punkte</p>
+                        <p class="text-gray-600">Genauigkeit: ${averages[0].accuracy.toFixed(0)}%</p>
+                    </div>
+                `;
+
+                if (averages.length > 1) {
+                    const worst = averages[averages.length - 1];
+                    worstPerf.innerHTML = `
+                        <div class="text-sm">
+                            <p class="font-semibold">${worst.name}</p>
+                            <p class="text-gray-600">Durchschnitt: ${worst.average.toFixed(1)} Punkte</p>
+                            <p class="text-gray-600">Genauigkeit: ${worst.accuracy.toFixed(0)}%</p>
+                        </div>
+                    `;
+                } else {
+                    worstPerf.innerHTML = '<p class="text-sm text-gray-500">Spiele mehr Kategorien!</p>';
+                }
+            } else {
+                bestPerf.innerHTML = '<p class="text-sm text-gray-500">Noch keine Daten</p>';
+                worstPerf.innerHTML = '<p class="text-sm text-gray-500">Noch keine Daten</p>';
+            }
+        }
+
+        function resetStats() {
+            if (confirm('Möchtest du wirklich alle Statistiken zurücksetzen? Diese Aktion kann nicht rückgängig gemacht werden.')) {
+                statsManager.reset();
+                renderStats();
+                updateQuickStats();
+                updateCategoryGames();
+            }
+        }
+    </script>
+</body>
+</html>

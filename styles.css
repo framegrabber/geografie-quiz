@@ -1,0 +1,78 @@
+/* Quiz Styles */
+.state, .country, .region {
+    transition: all 0.2s ease;
+    cursor: pointer;
+    stroke: #333;
+    stroke-width: 1;
+}
+
+.state:hover, .country:hover, .region:hover {
+    stroke-width: 2;
+    filter: brightness(0.95);
+}
+
+.state.correct, .country.correct, .region.correct {
+    fill: #4caf50 !important;
+}
+
+.state.incorrect, .country.incorrect, .region.incorrect {
+    fill: #f44336 !important;
+}
+
+.category-btn {
+    transition: all 0.3s ease;
+}
+
+.category-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.stat-card {
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Map Container */
+.map-container {
+    background: white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+/* Loading Spinner */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .category-btn {
+        padding: 1rem;
+    }
+    
+    .stat-card {
+        padding: 0.75rem;
+    }
+}
