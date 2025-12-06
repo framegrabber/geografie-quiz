@@ -13,8 +13,8 @@ const MAP_CONFIG = {
         url: 'https://raw.githubusercontent.com/leakyMirror/map-of-europe/master/GeoJSON/europe.geojson',
         projection: {
             type: 'geoMercator',
-            center: [15, 54],
-            scale: 800
+            center: [10, 54],
+            scale: 650
         },
         nameProperty: 'NAME'
     },
