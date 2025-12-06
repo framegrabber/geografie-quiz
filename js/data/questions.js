@@ -221,7 +221,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu welchem Land?",
             flag: "flags/Ungarn.svg",
-            answers: ["Ungarn", "Rumänien", "Österreich", "Tschechien"],
+            answers: ["Ungarn", "Österreich", "Polen", "Schweiz"],
             correctAnswer: "Ungarn",
             type: "flag-to-country",
             category: "Europa-Flaggen"
@@ -229,7 +229,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu welchem Land?",
             flag: "flags/Griechenland.svg",
-            answers: ["Griechenland", "Bulgarien", "Portugal", "Kroatien"],
+            answers: ["Griechenland", "Portugal", "Spanien", "Türkei"],
             correctAnswer: "Griechenland",
             type: "flag-to-country",
             category: "Europa-Flaggen"
@@ -237,7 +237,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu welchem Land?",
             flag: "flags/Österreich.svg",
-            answers: ["Österreich", "Ungarn", "Tschechien", "Slowakei"],
+            answers: ["Österreich", "Ungarn", "Schweiz", "Italien"],
             correctAnswer: "Österreich",
             type: "flag-to-country",
             category: "Europa-Flaggen"
@@ -261,7 +261,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu welchem Land?",
             flag: "flags/Großbritannien.svg",
-            answers: ["Großbritannien", "Irland", "Australien", "Neuseeland"],
+            answers: ["Großbritannien", "Irland", "Schweden", "Dänemark"],
             correctAnswer: "Großbritannien",
             type: "flag-to-country",
             category: "Europa-Flaggen"
@@ -277,7 +277,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu welchem Land?",
             flag: "flags/Russland.svg",
-            answers: ["Russland", "Serbien", "Bulgarien", "Ukraine"],
+            answers: ["Russland", "Polen", "Frankreich", "Ungarn"],
             correctAnswer: "Russland",
             type: "flag-to-country",
             category: "Europa-Flaggen"
@@ -301,7 +301,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu welchem Land?",
             flag: "flags/Irland.svg",
-            answers: ["Irland", "Großbritannien", "Dänemark", "Polen"],
+            answers: ["Irland", "Großbritannien", "Belgien", "Spanien"],
             correctAnswer: "Irland",
             type: "flag-to-country",
             category: "Europa-Flaggen"
@@ -317,7 +317,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu welchem Land?",
             flag: "flags/Finnland.svg",
-            answers: ["Finnland", "Norwegen", "Schweden", "Estland"],
+            answers: ["Finnland", "Norwegen", "Schweden", "Dänemark"],
             correctAnswer: "Finnland",
             type: "flag-to-country",
             category: "Europa-Flaggen"
@@ -325,7 +325,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu welchem Land?",
             flag: "flags/Türkei.svg",
-            answers: ["Türkei", "Griechenland", "Bulgarien", "Georgien"],
+            answers: ["Türkei", "Griechenland", "Russland", "Frankreich"],
             correctAnswer: "Türkei",
             type: "flag-to-country",
             category: "Europa-Flaggen"
@@ -374,7 +374,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu Ungarn?",
             country: "Ungarn",
-            flagOptions: ["flags/Ungarn.svg", "flags/Polen.svg", "flags/Österreich.svg", "flags/Rumänien.svg"],
+            flagOptions: ["flags/Ungarn.svg", "flags/Polen.svg", "flags/Österreich.svg", "flags/Schweiz.svg"],
             correctFlag: "flags/Ungarn.svg",
             type: "country-to-flag",
             category: "Europa-Flaggen"
@@ -382,7 +382,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu Griechenland?",
             country: "Griechenland",
-            flagOptions: ["flags/Griechenland.svg", "flags/Bulgarien.svg", "flags/Serbien.svg", "flags/Portugal.svg"],
+            flagOptions: ["flags/Griechenland.svg", "flags/Spanien.svg", "flags/Türkei.svg", "flags/Portugal.svg"],
             correctFlag: "flags/Griechenland.svg",
             type: "country-to-flag",
             category: "Europa-Flaggen"
@@ -390,7 +390,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu Österreich?",
             country: "Österreich",
-            flagOptions: ["flags/Österreich.svg", "flags/Ungarn.svg", "flags/Deutschland.svg", "flags/Tschechien.svg"],
+            flagOptions: ["flags/Österreich.svg", "flags/Ungarn.svg", "flags/Deutschland.svg", "flags/Schweiz.svg"],
             correctFlag: "flags/Österreich.svg",
             type: "country-to-flag",
             category: "Europa-Flaggen"
@@ -414,7 +414,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu Großbritannien?",
             country: "Großbritannien",
-            flagOptions: ["flags/Großbritannien.svg", "flags/Irland.svg", "flags/Australien.svg", "flags/Kanada.svg"],
+            flagOptions: ["flags/Großbritannien.svg", "flags/Irland.svg", "flags/Frankreich.svg", "flags/Schweden.svg"],
             correctFlag: "flags/Großbritannien.svg",
             type: "country-to-flag",
             category: "Europa-Flaggen"
@@ -430,7 +430,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu Russland?",
             country: "Russland",
-            flagOptions: ["flags/Russland.svg", "flags/Weißrussland.svg", "flags/Ukraine.svg", "flags/Serbien.svg"],
+            flagOptions: ["flags/Russland.svg", "flags/Frankreich.svg", "flags/Schweden.svg", "flags/Polen.svg"],
             correctFlag: "flags/Russland.svg",
             type: "country-to-flag",
             category: "Europa-Flaggen"
@@ -454,7 +454,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu Irland?",
             country: "Irland",
-            flagOptions: ["flags/Irland.svg", "flags/Großbritannien.svg", "flags/Indien.svg", "flags/Italien.svg"],
+            flagOptions: ["flags/Irland.svg", "flags/Großbritannien.svg", "flags/Spanien.svg", "flags/Italien.svg"],
             correctFlag: "flags/Irland.svg",
             type: "country-to-flag",
             category: "Europa-Flaggen"
@@ -462,7 +462,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu Norwegen?",
             country: "Norwegen",
-            flagOptions: ["flags/Norwegen.svg", "flags/Schweden.svg", "flags/Dänemark.svg", "flags/Island.svg"],
+            flagOptions: ["flags/Norwegen.svg", "flags/Schweden.svg", "flags/Dänemark.svg", "flags/Finnland.svg"],
             correctFlag: "flags/Norwegen.svg",
             type: "country-to-flag",
             category: "Europa-Flaggen"
@@ -478,7 +478,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu Finnland?",
             country: "Finnland",
-            flagOptions: ["flags/Finnland.svg", "flags/Norwegen.svg", "flags/Schweden.svg", "flags/Estland.svg"],
+            flagOptions: ["flags/Finnland.svg", "flags/Norwegen.svg", "flags/Schweden.svg", "flags/Dänemark.svg"],
             correctFlag: "flags/Finnland.svg",
             type: "country-to-flag",
             category: "Europa-Flaggen"
@@ -486,7 +486,7 @@ const quizData = {
         {
             question: "Welche Flagge gehört zu Türkei?",
             country: "Türkei",
-            flagOptions: ["flags/Türkei.svg", "flags/Griechenland.svg", "flags/Bulgarien.svg", "flags/Georgien.svg"],
+            flagOptions: ["flags/Türkei.svg", "flags/Griechenland.svg", "flags/Russland.svg", "flags/Frankreich.svg"],
             correctFlag: "flags/Türkei.svg",
             type: "country-to-flag",
             category: "Europa-Flaggen"
