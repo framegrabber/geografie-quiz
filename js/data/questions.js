@@ -168,6 +168,330 @@ const quizData = {
             category: "Europa"
         }
     ],
+    europa_flaggen: [
+        // Flag to Country - alle 20 Länder
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Deutschland.svg",
+            answers: ["Deutschland", "Belgien", "Schweden", "Polen"],
+            correctAnswer: "Deutschland",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Frankreich.svg",
+            answers: ["Frankreich", "Italien", "Niederlande", "Österreich"],
+            correctAnswer: "Frankreich",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Schweden.svg",
+            answers: ["Schweden", "Finnland", "Norwegen", "Dänemark"],
+            correctAnswer: "Schweden",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Italien.svg",
+            answers: ["Italien", "Spanien", "Griechenland", "Portugal"],
+            correctAnswer: "Italien",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Spanien.svg",
+            answers: ["Spanien", "Portugal", "Belgien", "Frankreich"],
+            correctAnswer: "Spanien",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Polen.svg",
+            answers: ["Polen", "Ungarn", "Deutschland", "Niederlande"],
+            correctAnswer: "Polen",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Ungarn.svg",
+            answers: ["Ungarn", "Rumänien", "Österreich", "Tschechien"],
+            correctAnswer: "Ungarn",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Griechenland.svg",
+            answers: ["Griechenland", "Bulgarien", "Portugal", "Kroatien"],
+            correctAnswer: "Griechenland",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Österreich.svg",
+            answers: ["Österreich", "Ungarn", "Tschechien", "Slowakei"],
+            correctAnswer: "Österreich",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Dänemark.svg",
+            answers: ["Dänemark", "Schweden", "Norwegen", "Finnland"],
+            correctAnswer: "Dänemark",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Schweiz.svg",
+            answers: ["Schweiz", "Österreich", "Belgien", "Luxemburg"],
+            correctAnswer: "Schweiz",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Großbritannien.svg",
+            answers: ["Großbritannien", "Irland", "Australien", "Neuseeland"],
+            correctAnswer: "Großbritannien",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Belgien.svg",
+            answers: ["Belgien", "Niederlande", "Luxemburg", "Dänemark"],
+            correctAnswer: "Belgien",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Russland.svg",
+            answers: ["Russland", "Serbien", "Bulgarien", "Ukraine"],
+            correctAnswer: "Russland",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Niederlande.svg",
+            answers: ["Niederlande", "Belgien", "Dänemark", "Schweden"],
+            correctAnswer: "Niederlande",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Portugal.svg",
+            answers: ["Portugal", "Spanien", "Griechenland", "Italien"],
+            correctAnswer: "Portugal",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Irland.svg",
+            answers: ["Irland", "Großbritannien", "Dänemark", "Polen"],
+            correctAnswer: "Irland",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Norwegen.svg",
+            answers: ["Norwegen", "Schweden", "Finnland", "Dänemark"],
+            correctAnswer: "Norwegen",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Finnland.svg",
+            answers: ["Finnland", "Norwegen", "Schweden", "Estland"],
+            correctAnswer: "Finnland",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu welchem Land?",
+            flag: "flags/Türkei.svg",
+            answers: ["Türkei", "Griechenland", "Bulgarien", "Georgien"],
+            correctAnswer: "Türkei",
+            type: "flag-to-country",
+            category: "Europa-Flaggen"
+        },
+        // Country to Flag - alle 20 Länder
+        {
+            question: "Welche Flagge gehört zu Deutschland?",
+            country: "Deutschland",
+            flagOptions: ["flags/Deutschland.svg", "flags/Belgien.svg", "flags/Niederlande.svg", "flags/Luxemburg.svg"],
+            correctFlag: "flags/Deutschland.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Frankreich?",
+            country: "Frankreich",
+            flagOptions: ["flags/Frankreich.svg", "flags/Italien.svg", "flags/Belgien.svg", "flags/Niederlande.svg"],
+            correctFlag: "flags/Frankreich.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Spanien?",
+            country: "Spanien",
+            flagOptions: ["flags/Portugal.svg", "flags/Spanien.svg", "flags/Belgien.svg", "flags/Frankreich.svg"],
+            correctFlag: "flags/Spanien.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Italien?",
+            country: "Italien",
+            flagOptions: ["flags/Italien.svg", "flags/Irland.svg", "flags/Ungarn.svg", "flags/Griechenland.svg"],
+            correctFlag: "flags/Italien.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Polen?",
+            country: "Polen",
+            flagOptions: ["flags/Polen.svg", "flags/Ungarn.svg", "flags/Österreich.svg", "flags/Tschechien.svg"],
+            correctFlag: "flags/Polen.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Ungarn?",
+            country: "Ungarn",
+            flagOptions: ["flags/Ungarn.svg", "flags/Polen.svg", "flags/Österreich.svg", "flags/Rumänien.svg"],
+            correctFlag: "flags/Ungarn.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Griechenland?",
+            country: "Griechenland",
+            flagOptions: ["flags/Griechenland.svg", "flags/Bulgarien.svg", "flags/Serbien.svg", "flags/Portugal.svg"],
+            correctFlag: "flags/Griechenland.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Österreich?",
+            country: "Österreich",
+            flagOptions: ["flags/Österreich.svg", "flags/Ungarn.svg", "flags/Deutschland.svg", "flags/Tschechien.svg"],
+            correctFlag: "flags/Österreich.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Dänemark?",
+            country: "Dänemark",
+            flagOptions: ["flags/Dänemark.svg", "flags/Schweden.svg", "flags/Norwegen.svg", "flags/Finnland.svg"],
+            correctFlag: "flags/Dänemark.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Schweiz?",
+            country: "Schweiz",
+            flagOptions: ["flags/Schweiz.svg", "flags/Österreich.svg", "flags/Belgien.svg", "flags/Deutschland.svg"],
+            correctFlag: "flags/Schweiz.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Großbritannien?",
+            country: "Großbritannien",
+            flagOptions: ["flags/Großbritannien.svg", "flags/Irland.svg", "flags/Australien.svg", "flags/Kanada.svg"],
+            correctFlag: "flags/Großbritannien.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Belgien?",
+            country: "Belgien",
+            flagOptions: ["flags/Belgien.svg", "flags/Niederlande.svg", "flags/Luxemburg.svg", "flags/Frankreich.svg"],
+            correctFlag: "flags/Belgien.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Russland?",
+            country: "Russland",
+            flagOptions: ["flags/Russland.svg", "flags/Weißrussland.svg", "flags/Ukraine.svg", "flags/Serbien.svg"],
+            correctFlag: "flags/Russland.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Niederlande?",
+            country: "Niederlande",
+            flagOptions: ["flags/Niederlande.svg", "flags/Belgien.svg", "flags/Luxemburg.svg", "flags/Frankreich.svg"],
+            correctFlag: "flags/Niederlande.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Portugal?",
+            country: "Portugal",
+            flagOptions: ["flags/Portugal.svg", "flags/Spanien.svg", "flags/Griechenland.svg", "flags/Belgien.svg"],
+            correctFlag: "flags/Portugal.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Irland?",
+            country: "Irland",
+            flagOptions: ["flags/Irland.svg", "flags/Großbritannien.svg", "flags/Indien.svg", "flags/Italien.svg"],
+            correctFlag: "flags/Irland.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Norwegen?",
+            country: "Norwegen",
+            flagOptions: ["flags/Norwegen.svg", "flags/Schweden.svg", "flags/Dänemark.svg", "flags/Island.svg"],
+            correctFlag: "flags/Norwegen.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Schweden?",
+            country: "Schweden",
+            flagOptions: ["flags/Schweden.svg", "flags/Norwegen.svg", "flags/Finnland.svg", "flags/Dänemark.svg"],
+            correctFlag: "flags/Schweden.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Finnland?",
+            country: "Finnland",
+            flagOptions: ["flags/Finnland.svg", "flags/Norwegen.svg", "flags/Schweden.svg", "flags/Estland.svg"],
+            correctFlag: "flags/Finnland.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        },
+        {
+            question: "Welche Flagge gehört zu Türkei?",
+            country: "Türkei",
+            flagOptions: ["flags/Türkei.svg", "flags/Griechenland.svg", "flags/Bulgarien.svg", "flags/Georgien.svg"],
+            correctFlag: "flags/Türkei.svg",
+            type: "country-to-flag",
+            category: "Europa-Flaggen"
+        }
+    ],
     nachbarlaender: [
         {
             question: "Wie viele Nachbarländer hat Deutschland?",

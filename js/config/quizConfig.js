@@ -9,10 +9,11 @@ const QUIZ_CONFIG = {
         categories: {
             bundeslaender: { games: 0, points: 0, correct: 0, wrong: 0 },
             europa: { games: 0, points: 0, correct: 0, wrong: 0 },
+            europa_flaggen: { games: 0, points: 0, correct: 0, wrong: 0 },
             nachbarlaender: { games: 0, points: 0, correct: 0, wrong: 0 },
             bayern: { games: 0, points: 0, correct: 0, wrong: 0 },
             mix: { games: 0, points: 0, correct: 0, wrong: 0 }
-        }
+        },
     },
     statsCookieName: 'quizStats',
     statsCookieDays: 365

@@ -36,6 +36,10 @@ class QuestionRenderer {
             this.renderMultipleChoice(question);
         } else if (question.type === 'map') {
             this.renderMapQuestion(question);
+        } else if (question.type === 'flag-to-country') {
+            this.renderFlagToCountry(question);
+        } else if (question.type === 'country-to-flag') {
+            this.renderCountryToFlag(question);
         }
     }
 
@@ -162,5 +166,85 @@ class QuestionRenderer {
         if (this.answerCallback) {
             this.answerCallback('map', question.correctAnswer, question.category);
         }
+    }
+
+    renderFlagToCountry(question) {
+        // Hide map elements
+        this.elements.mapContainer.classList.add('hidden');
+        this.elements.mapInstruction.classList.add('hidden');
+
+        // Show answer container
+        this.elements.answerContainer.classList.remove('hidden');
+        clearContainer(this.elements.answerContainer);
+
+        // Show flag image
+        const flagImg = document.createElement('img');
+        flagImg.src = question.flag;
+        flagImg.alt = 'Flagge';
+        flagImg.className = 'w-32 h-20 object-contain mx-auto mb-4 border border-gray-300 rounded';
+        this.elements.answerContainer.appendChild(flagImg);
+
+        // Create answer buttons
+        question.answers.forEach(answer => {
+            const button = document.createElement('button');
+            button.textContent = answer;
+            button.className = 'w-full p-4 text-left rounded-lg border-2 border-gray-300 hover:border-blue-500 hover:bg-blue-50 transition';
+            button.dataset.answer = answer;
+            button.addEventListener('click', () => this.handleMultipleChoiceAnswer(answer, button, question.correctAnswer));
+            this.elements.answerContainer.appendChild(button);
+        });
+    }
+
+    renderCountryToFlag(question) {
+        // Hide map elements
+        this.elements.mapContainer.classList.add('hidden');
+        this.elements.mapInstruction.classList.add('hidden');
+
+        // Show answer container
+        this.elements.answerContainer.classList.remove('hidden');
+        clearContainer(this.elements.answerContainer);
+
+        // Show country name
+        const countryLabel = document.createElement('div');
+        countryLabel.textContent = question.country;
+        countryLabel.className = 'text-xl font-bold mb-4 text-center';
+        this.elements.answerContainer.appendChild(countryLabel);
+
+        // Create flag option buttons
+        question.flagOptions.forEach(flagPath => {
+            const button = document.createElement('button');
+            button.className = 'inline-block m-2 p-2 border-2 border-gray-300 rounded hover:border-blue-500 bg-white';
+            button.dataset.flag = flagPath;
+
+            const img = document.createElement('img');
+            img.src = flagPath;
+            img.alt = 'Flagge';
+            img.className = 'w-24 h-16 object-contain';
+            button.appendChild(img);
+
+            button.addEventListener('click', () => this.handleFlagChoiceAnswer(flagPath, button, question.correctFlag));
+            this.elements.answerContainer.appendChild(button);
+        });
+    }
+
+    handleFlagChoiceAnswer(selectedFlag, button, correctFlag) {
+        const buttons = this.elements.answerContainer.querySelectorAll('button[data-flag]');
+        disableAllButtons(this.elements.answerContainer);
+        const isCorrect = selectedFlag === correctFlag;
+        if (isCorrect) {
+            button.classList.add('bg-green-100', 'border-green-500');
+        } else {
+            button.classList.add('bg-red-100', 'border-red-500');
+            // Show correct flag
+            buttons.forEach(btn => {
+                if (btn.dataset.flag === correctFlag) {
+                    btn.classList.add('bg-green-100', 'border-green-500');
+                }
+            });
+        }
+        if (this.answerCallback) {
+            this.answerCallback(isCorrect);
+        }
+        this.nextBtn.classList.remove('hidden');
     }
 }

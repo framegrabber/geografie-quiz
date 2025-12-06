@@ -10,15 +10,19 @@ class GameEngine {
         
         let questions;
         if (category === 'mix') {
-            const allQuestions = [
-                ...quizData.bundeslaender,
-                ...quizData.europa,
-                ...quizData.nachbarlaender,
-                ...quizData.bayern
-            ];
+            const mixCats = ['bundeslaender', 'europa', 'europa_flaggen', 'nachbarlaender', 'bayern'];
+            const allQuestions = mixCats.flatMap(cat => Array.isArray(quizData[cat]) ? quizData[cat] : []);
+            if (allQuestions.length === 0) {
+                console.warn('Mix mode: keine Fragen gefunden. Prüfe quizData.');
+            }
             questions = shuffleArray(allQuestions).slice(0, QUIZ_CONFIG.questionsPerQuiz);
         } else {
-            questions = shuffleArray([...quizData[category]]).slice(0, QUIZ_CONFIG.questionsPerQuiz);
+            if (!Array.isArray(quizData[category])) {
+                console.warn(`Kategorie "${category}" nicht gefunden in quizData.`);
+                questions = [];
+            } else {
+                questions = shuffleArray([...quizData[category]]).slice(0, QUIZ_CONFIG.questionsPerQuiz);
+            }
         }
         
         this.gameState.setQuestions(questions);
