@@ -349,16 +349,26 @@ const quizData = {
         }
     ],
     europa: [
+        // Frankreich
+        {
+            question: "Was ist die Hauptstadt von Frankreich?",
+            answers: ["Marseille", "Lyon", "Paris", "Toulouse"],
+            correctAnswer: "Paris",
+            type: "multiple",
+            category: "Europa"
+        },
         {
             question: "Wo liegt Frankreich auf der Karte?",
             correctAnswer: "France",
             type: "map",
             category: "Europa"
         },
+
+        // Italien
         {
-            question: "Was ist die Hauptstadt von Frankreich?",
-            answers: ["Marseille", "Lyon", "Paris", "Toulouse"],
-            correctAnswer: "Paris",
+            question: "Was ist die Hauptstadt von Italien?",
+            answers: ["Mailand", "Rom", "Neapel", "Turin"],
+            correctAnswer: "Rom",
             type: "multiple",
             category: "Europa"
         },
@@ -368,10 +378,12 @@ const quizData = {
             type: "map",
             category: "Europa"
         },
+
+        // Spanien
         {
-            question: "Was ist die Hauptstadt von Italien?",
-            answers: ["Mailand", "Rom", "Neapel", "Turin"],
-            correctAnswer: "Rom",
+            question: "Was ist die Hauptstadt von Spanien?",
+            answers: ["Barcelona", "Madrid", "Valencia", "Sevilla"],
+            correctAnswer: "Madrid",
             type: "multiple",
             category: "Europa"
         },
@@ -381,10 +393,27 @@ const quizData = {
             type: "map",
             category: "Europa"
         },
+
+        // Polen
         {
             question: "Was ist die Hauptstadt von Polen?",
             answers: ["Krakau", "Warschau", "Danzig", "Breslau"],
             correctAnswer: "Warschau",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt Polen auf der Karte?",
+            correctAnswer: "Poland",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Schweden
+        {
+            question: "Was ist die Hauptstadt von Schweden?",
+            answers: ["Göteborg", "Stockholm", "Malmö", "Uppsala"],
+            correctAnswer: "Stockholm",
             type: "multiple",
             category: "Europa"
         },
@@ -394,10 +423,27 @@ const quizData = {
             type: "map",
             category: "Europa"
         },
+
+        // Griechenland
         {
             question: "Was ist die Hauptstadt von Griechenland?",
             answers: ["Thessaloniki", "Athen", "Patras", "Heraklion"],
             correctAnswer: "Athen",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt Griechenland auf der Karte?",
+            correctAnswer: "Greece",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Norwegen
+        {
+            question: "Was ist die Hauptstadt von Norwegen?",
+            answers: ["Bergen", "Trondheim", "Oslo", "Stavanger"],
+            correctAnswer: "Oslo",
             type: "multiple",
             category: "Europa"
         },
@@ -407,10 +453,27 @@ const quizData = {
             type: "map",
             category: "Europa"
         },
+
+        // Portugal
         {
             question: "Was ist die Hauptstadt von Portugal?",
             answers: ["Porto", "Lissabon", "Braga", "Coimbra"],
             correctAnswer: "Lissabon",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt Portugal auf der Karte?",
+            correctAnswer: "Portugal",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Deutschland
+        {
+            question: "Was ist die Hauptstadt von Deutschland?",
+            answers: ["München", "Hamburg", "Berlin", "Köln"],
+            correctAnswer: "Berlin",
             type: "multiple",
             category: "Europa"
         },
@@ -420,13 +483,203 @@ const quizData = {
             type: "map",
             category: "Europa"
         },
+
+        // Finnland
         {
-            question: "Was ist die Hauptstadt von Spanien?",
-            answers: ["Barcelona", "Madrid", "Valencia", "Sevilla"],
-            correctAnswer: "Madrid",
+            question: "Was ist die Hauptstadt von Finnland?",
+            answers: ["Turku", "Tampere", "Helsinki", "Oulu"],
+            correctAnswer: "Helsinki",
             type: "multiple",
             category: "Europa"
         },
+        {
+            question: "Wo liegt Finnland auf der Karte?",
+            correctAnswer: "Finland",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Dänemark
+        {
+            question: "Was ist die Hauptstadt von Dänemark?",
+            answers: ["Aarhus", "Odense", "Kopenhagen", "Randers"],
+            correctAnswer: "Kopenhagen",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt Dänemark auf der Karte?",
+            correctAnswer: "Denmark",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Belgien
+        {
+            question: "Was ist die Hauptstadt von Belgien?",
+            answers: ["Antwerpen", "Brüssel", "Gent", "Brügge"],
+            correctAnswer: "Brüssel",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt Belgien auf der Karte?",
+            correctAnswer: "Belgium",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Niederlande
+        {
+            question: "Was ist die Hauptstadt der Niederlande?",
+            answers: ["Rotterdam", "Den Haag", "Amsterdam", "Utrecht"],
+            correctAnswer: "Amsterdam",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegen die Niederlande auf der Karte?",
+            correctAnswer: "Netherlands",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Österreich
+        {
+            question: "Was ist die Hauptstadt von Österreich?",
+            answers: ["Graz", "Linz", "Wien", "Salzburg"],
+            correctAnswer: "Wien",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt Österreich auf der Karte?",
+            correctAnswer: "Austria",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Schweiz
+        {
+            question: "Was ist die Hauptstadt der Schweiz?",
+            answers: ["Zürich", "Genf", "Bern", "Basel"],
+            correctAnswer: "Bern",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt die Schweiz auf der Karte?",
+            correctAnswer: "Switzerland",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Tschechien
+        {
+            question: "Was ist die Hauptstadt von Tschechien?",
+            answers: ["Brünn", "Prag", "Ostrava", "Pilsen"],
+            correctAnswer: "Prag",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt Tschechien auf der Karte?",
+            correctAnswer: "Czechia",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Ungarn
+        {
+            question: "Was ist die Hauptstadt von Ungarn?",
+            answers: ["Debrecen", "Miskolc", "Budapest", "Szeged"],
+            correctAnswer: "Budapest",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt Ungarn auf der Karte?",
+            correctAnswer: "Hungary",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Rumänien
+        {
+            question: "Was ist die Hauptstadt von Rumänien?",
+            answers: ["Klausenburg", "Timișoara", "Bukarest", "Constanța"],
+            correctAnswer: "Bukarest",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt Rumänien auf der Karte?",
+            correctAnswer: "Romania",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Bulgarien
+        {
+            question: "Was ist die Hauptstadt von Bulgarien?",
+            answers: ["Plovdiv", "Varna", "Sofia", "Ruse"],
+            correctAnswer: "Sofia",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt Bulgarien auf der Karte?",
+            correctAnswer: "Bulgaria",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Slowakei
+        {
+            question: "Was ist die Hauptstadt der Slowakei?",
+            answers: ["Košice", "Prešov", "Bratislava", "Banská Bystrica"],
+            correctAnswer: "Bratislava",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt die Slowakei auf der Karte?",
+            correctAnswer: "Slovakia",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Großbritannien
+        {
+            question: "Was ist die Hauptstadt von Großbritannien?",
+            answers: ["Manchester", "Liverpool", "London", "Birmingham"],
+            correctAnswer: "London",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt Großbritannien auf der Karte?",
+            correctAnswer: "United Kingdom",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Irland
+        {
+            question: "Was ist die Hauptstadt von Irland?",
+            answers: ["Cork", "Galway", "Dublin", "Limerick"],
+            correctAnswer: "Dublin",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Wo liegt Irland auf der Karte?",
+            correctAnswer: "Ireland",
+            type: "map",
+            category: "Europa"
+        },
+
+        // Allgemeine Fragen
         {
             question: "Welche der folgenden Länder sind Inselstaaten?",
             answers: ["Griechenland", "Irland", "Island", "Portugal"],
