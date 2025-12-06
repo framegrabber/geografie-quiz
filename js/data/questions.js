@@ -35,9 +35,9 @@ const quizData = {
             category: "Bundesländer"
         },
         {
-            question: "Welches Bundesland ist ein Stadtstaat?",
+            question: "Welche der folgenden Bundesländer sind Stadtstaaten?",
             answers: ["Saarland", "Hamburg", "Bremen", "Berlin"],
-            correctAnswer: "Hamburg",
+            correctAnswer: ["Hamburg", "Bremen", "Berlin"],
             type: "multiple",
             category: "Bundesländer"
         },
@@ -157,6 +157,13 @@ const quizData = {
             question: "Was ist die Hauptstadt von Spanien?",
             answers: ["Barcelona", "Madrid", "Valencia", "Sevilla"],
             correctAnswer: "Madrid",
+            type: "multiple",
+            category: "Europa"
+        },
+        {
+            question: "Welche der folgenden Länder sind Inselstaaten?",
+            answers: ["Griechenland", "Irland", "Island", "Portugal"],
+            correctAnswer: ["Irland", "Island"],
             type: "multiple",
             category: "Europa"
         }
