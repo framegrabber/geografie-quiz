@@ -73,7 +73,10 @@ class App {
                 scoreDisplay: document.getElementById('scoreDisplay'),
                 correctCount: document.getElementById('correctCount'),
                 wrongCount: document.getElementById('wrongCount'),
-                nextBtn: document.getElementById('nextBtn')
+                nextBtn: document.getElementById('nextBtn'),
+                finalScore: document.getElementById('finalScore'),
+                finalCorrect: document.getElementById('finalCorrect'),
+                finalWrong: document.getElementById('finalWrong')
             },
             stats: {
                 statTotalGames: document.getElementById('statTotalGames'),

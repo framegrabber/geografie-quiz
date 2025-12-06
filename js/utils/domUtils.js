@@ -36,9 +36,13 @@ function clearContainer(container) {
 }
 
 function updateElementText(element, text) {
-    element.textContent = text;
+    if (element) {
+        element.textContent = text;
+    }
 }
 
 function updateElementContent(element, html) {
-    element.innerHTML = html;
+    if (element) {
+        element.innerHTML = html;
+    }
 }
